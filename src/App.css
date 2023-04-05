@@ -53,7 +53,7 @@ html{
 }
 
 .singleTodo{
-  width: 200px;
+  width: 300px;
   display: flex;
   justify-content: space-between;
   align-items: start;
@@ -65,4 +65,18 @@ html{
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.search{
+  display: flex;
+  justify-content: space-between;
+}
+
+.search input{
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  padding: 0 10px;
+  background-color: #70e1f5;
+  color: #556270;
 }

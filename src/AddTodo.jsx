@@ -6,12 +6,14 @@ function AddTodo() {
     const [isEdit, setIsEdit] = useState(false)
     const [editIndex, setEditIndex] = useState(null)
     const [todoList, setTodoList] = useState(JSON.parse(localStorage.getItem('todos')) || [])
+    const [filtertodo,setFilterTodo] = useState(todoList)
     const inputRef = useRef()
     const submitRef = useRef();
 
     useEffect(() => {
         JSON.parse(localStorage.getItem('todos'))
     }, [todoList])
+
 
     // Add Todo Function //
 
@@ -63,6 +65,24 @@ function AddTodo() {
         submitRef.current.value = 'Edit';
     }
 
+    //function for search todo //
+
+    const handleSearch = (search) => {
+        let dataList = todoList
+        setFilterTodo(dataList)
+        let filteredTodo = todoList.filter((ele)=>{
+            return ele.todo === search.toUpperCase()
+        })
+        setTodoList(filteredTodo)
+        if(search === ""){
+            setTodoList(filtertodo)
+        }
+        else{
+            setTodoList(dataList)
+        }
+    }
+
+
     return (
         <div className='todo-cont'>
         <h1>List Out Your Todos</h1>
@@ -75,7 +95,10 @@ function AddTodo() {
 
             <div className="renderTodoCont">
                 <div>
+                <div className="search">
                     <h2>Pending Todos</h2>
+                    <input type="text"  placeholder='Search Your Todo...' onBlur={(e)=>handleSearch(e.target.value)}/>
+                </div>
                     {
                         todoList.map((ele) => {
                             return (
